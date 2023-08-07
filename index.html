@@ -24,6 +24,8 @@ Author URI: http://webthemez.com/
 <!--[if lte IE 8]>
 		<script type="text/javascript" src="http://explorercanvas.googlecode.com/svn/trunk/excanvas.js"></script>
 	<![endif]-->
+  <script src="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/src/flipdown.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipdown@0.3.2/dist/flipdown.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link href="css/animate.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="css/styles.css" />
@@ -51,12 +53,13 @@ Author URI: http://webthemez.com/
       <div class="heading text-center">
         <div class=""> <img width="180" height="180"  src="images/logo.png" alr='logo'/> </div>
         <h2>Our site is coming soon!!!</h2>
-        <strong>Stay tuned for something amazing</strong> </div>
-      <div class="countdown styled">
-        
+        <strong>Stay tuned for something amazing</strong> 
       </div>
+      <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+        <div id="flipdown" class="flipdown"></div>
+      </div>
+      </div> 
     </div>
-  </div>
 </section> 
 <section id="services" class="page-section colord">
     <div class="container">
@@ -205,6 +208,34 @@ Author URI: http://webthemez.com/
 <script src="js/Backstretch.js" type="text/javascript"></script> 
 <script src="js/custom.js" type="text/javascript"></script> 
 <script type="text/javascript" src="js/jquery.countdown.js"></script>
+<script>
+      document.addEventListener('DOMContentLoaded', () => {
 
+    // Unix timestamp (in seconds) to count down to
+    var twoDaysFromNow = (new Date().getTime() / 1000) + (86400 * 2) + 20;
+
+    // Set up FlipDown
+    var flipdown = new FlipDown(twoDaysFromNow)
+
+      // Start the countdown
+      .start()
+
+      // Do something when the countdown ends
+      .ifEnded(() => {
+        console.log('The countdown has ended!');
+      });
+
+    // Toggle theme
+    var interval = setInterval(() => {
+      let body = document.body;
+      body.classList.toggle('light-theme');
+      body.querySelector('#flipdown').classList.toggle('flipdown__theme-dark');
+      body.querySelector('#flipdown').classList.toggle('flipdown__theme-light');
+    }, 5000);
+
+    var ver = document.getElementById('ver');
+    ver.innerHTML = flipdown.version;
+    });
+</script>
 </body>
 </html>
